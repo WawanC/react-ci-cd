@@ -2,7 +2,7 @@ name: Deploy to staging
 
 env:
   CONTEXT_DIR: "./"
-  IMAGE_NAME: ${{ github.repository }}/staging
+  REPO: ${{ github.repository }}/staging
   DOCKERFILE: Dockerfile.staging
   CAPROVER_APP: myapp-staging
   DOCKER_REGISTRY: ghcr.io
@@ -19,6 +19,10 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     steps:
+      - name: downcase REPO
+        run: |
+          echo "IMAGE_NAME=${REPO,,}" >>${GITHUB_ENV}
+
       - uses: actions/checkout@v1
       - run: |
           echo "IMAGE_NAME_WITH_REGISTRY=$DOCKER_REGISTRY/$IMAGE_NAME" >> $GITHUB_ENV
