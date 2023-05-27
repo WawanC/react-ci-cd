@@ -3,7 +3,7 @@ name: Deploy to staging
 env:
   CONTEXT_DIR: "./"
   REPO: ${{ github.repository }}/staging
-  DOCKERFILE: Dockerfile.staging
+  DOCKERFILE: Dockerfile
   CAPROVER_APP: myapp-staging
   DOCKER_REGISTRY: ghcr.io
 
